@@ -1,7 +1,7 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import Section from '../components/ui/Section';
-import { Check, Shield, Clock, Search, FileText, Wrench, Star, ArrowRight, MapPin, ChevronDown, ChevronUp, Phone } from 'lucide-react';
+import { Check, Shield, Clock, Search, FileText, Wrench, Star, ArrowRight, MapPin, ChevronDown, ChevronUp, Phone, Loader2 } from 'lucide-react';
 
 // --- Subcomponents ---
 
@@ -16,7 +16,7 @@ const Hero = () => {
       {/* Background Image with Overlay */}
       <div className="absolute inset-0 z-0">
         <img 
-          src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?q=80&w=2670&auto=format&fit=crop" 
+          src="https://images.unsplash.com/photo-1613977257363-707ba9348227?q=80&w=2670&auto=format&fit=crop" 
           alt="Luxury Home Exterior" 
           className="w-full h-full object-cover opacity-60"
         />
@@ -98,7 +98,7 @@ const HiddenCost = () => {
         <div className="relative h-[500px] hidden md:block rounded-sm overflow-hidden shadow-lg">
              <img 
               src="https://storage.googleapis.com/msgsndr/Z9VkbpvTwFPgODZUYAw7/media/6929d95d32bffb1a4ca2a8bc.png" 
-              alt="South Tampa Home Exterior" 
+              alt="South Tampa Mediterranean Estate" 
               className="w-full h-full object-cover"
             />
             <div className="absolute inset-0 bg-brand-navy/5"></div>
@@ -371,6 +371,38 @@ const FAQ = () => {
 };
 
 const ContactForm = () => {
+  const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setStatus('submitting');
+    
+    const form = e.currentTarget;
+    const data = new FormData(form);
+    
+    // Convert FormData to JSON for better handling if needed, 
+    // but Formspree accepts FormData directly via fetch as well.
+    
+    try {
+      const response = await fetch('https://formspree.io/f/mkglkvpe', {
+        method: 'POST',
+        body: data,
+        headers: {
+          'Accept': 'application/json'
+        }
+      });
+      
+      if (response.ok) {
+        setStatus('success');
+        form.reset();
+      } else {
+        setStatus('error');
+      }
+    } catch (error) {
+      setStatus('error');
+    }
+  };
+
   return (
     <Section id="contact" bg="cream">
       <div className="grid md:grid-cols-12 gap-12 bg-white rounded-sm shadow-xl overflow-hidden border border-stone-100">
@@ -406,62 +438,99 @@ const ContactForm = () => {
         </div>
 
         <div className="md:col-span-7 p-12">
-          <h2 className="text-2xl font-serif font-bold text-brand-navy mb-2">Schedule Your Service</h2>
-          <p className="text-stone-500 mb-8">Ready to protect your South Tampa home? Get on the waitlist or schedule a consultation.</p>
-          
-          <form className="space-y-6">
-            <div className="grid md:grid-cols-2 gap-6">
-              <div>
-                <label htmlFor="name" className="block text-sm font-medium text-stone-700 mb-1">Name</label>
-                <input type="text" id="name" required className="w-full px-4 py-2 border border-stone-300 rounded-sm focus:ring-1 focus:ring-brand-sage focus:border-brand-sage outline-none" placeholder="John Doe" />
+          {status === 'success' ? (
+            <div className="h-full flex flex-col items-center justify-center text-center py-12">
+              <div className="w-16 h-16 bg-brand-sage/20 rounded-full flex items-center justify-center mb-6">
+                <Check className="w-8 h-8 text-brand-sage" />
               </div>
-              <div>
-                <label htmlFor="phone" className="block text-sm font-medium text-stone-700 mb-1">Phone</label>
-                <input type="tel" id="phone" required className="w-full px-4 py-2 border border-stone-300 rounded-sm focus:ring-1 focus:ring-brand-sage focus:border-brand-sage outline-none" placeholder="(813) 555-0123" />
-              </div>
+              <h3 className="text-2xl font-serif font-bold text-brand-navy mb-4">You're on the list!</h3>
+              <p className="text-stone-600 max-w-md">
+                Thank you for your interest in the HMS Founding Member Program. We have received your inquiry and will be in touch shortly to discuss your home maintenance needs.
+              </p>
+              <button 
+                onClick={() => setStatus('idle')}
+                className="mt-8 text-brand-sage font-medium hover:text-brand-navy transition-colors underline"
+              >
+                Send another message
+              </button>
             </div>
-            
-            <div>
-              <label htmlFor="email" className="block text-sm font-medium text-stone-700 mb-1">Email</label>
-              <input type="email" id="email" required className="w-full px-4 py-2 border border-stone-300 rounded-sm focus:ring-1 focus:ring-brand-sage focus:border-brand-sage outline-none" placeholder="john@example.com" />
-            </div>
-            
-             <div>
-              <label htmlFor="address" className="block text-sm font-medium text-stone-700 mb-1">South Tampa Property Address</label>
-              <input type="text" id="address" required className="w-full px-4 py-2 border border-stone-300 rounded-sm focus:ring-1 focus:ring-brand-sage focus:border-brand-sage outline-none" placeholder="123 Bayshore Blvd" />
-            </div>
+          ) : (
+            <>
+              <h2 className="text-2xl font-serif font-bold text-brand-navy mb-2">Schedule Your Service</h2>
+              <p className="text-stone-500 mb-8">Ready to protect your South Tampa home? Get on the waitlist or schedule a consultation.</p>
+              
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div>
+                    <label htmlFor="name" className="block text-sm font-medium text-stone-700 mb-1">Name</label>
+                    <input type="text" name="name" id="name" required className="w-full px-4 py-2 border border-stone-300 rounded-sm focus:ring-1 focus:ring-brand-sage focus:border-brand-sage outline-none" placeholder="John Doe" />
+                  </div>
+                  <div>
+                    <label htmlFor="phone" className="block text-sm font-medium text-stone-700 mb-1">Phone</label>
+                    <input type="tel" name="phone" id="phone" required className="w-full px-4 py-2 border border-stone-300 rounded-sm focus:ring-1 focus:ring-brand-sage focus:border-brand-sage outline-none" placeholder="(813) 555-0123" />
+                  </div>
+                </div>
+                
+                <div>
+                  <label htmlFor="email" className="block text-sm font-medium text-stone-700 mb-1">Email</label>
+                  <input type="email" name="email" id="email" required className="w-full px-4 py-2 border border-stone-300 rounded-sm focus:ring-1 focus:ring-brand-sage focus:border-brand-sage outline-none" placeholder="john@example.com" />
+                </div>
+                
+                 <div>
+                  <label htmlFor="address" className="block text-sm font-medium text-stone-700 mb-1">South Tampa Property Address</label>
+                  <input type="text" name="address" id="address" required className="w-full px-4 py-2 border border-stone-300 rounded-sm focus:ring-1 focus:ring-brand-sage focus:border-brand-sage outline-none" placeholder="123 Bayshore Blvd" />
+                </div>
 
-            <div>
-              <label htmlFor="plan" className="block text-sm font-medium text-stone-700 mb-1">Plan Interest</label>
-              <select id="plan" className="w-full px-4 py-2 border border-stone-300 rounded-sm focus:ring-1 focus:ring-brand-sage focus:border-brand-sage outline-none bg-white">
-                <option value="">Select a plan...</option>
-                <option value="essentials">Essentials Plan ($149/mo)</option>
-                <option value="steward">Steward Plan ($249/mo)</option>
-                <option value="estate">Estate Plan ($399/mo)</option>
-                <option value="unsure">Not Sure Yet</option>
-              </select>
-            </div>
+                <div>
+                  <label htmlFor="plan" className="block text-sm font-medium text-stone-700 mb-1">Plan Interest</label>
+                  <select name="plan" id="plan" className="w-full px-4 py-2 border border-stone-300 rounded-sm focus:ring-1 focus:ring-brand-sage focus:border-brand-sage outline-none bg-white">
+                    <option value="">Select a plan...</option>
+                    <option value="essentials">Essentials Plan ($149/mo)</option>
+                    <option value="steward">Steward Plan ($249/mo)</option>
+                    <option value="estate">Estate Plan ($399/mo)</option>
+                    <option value="unsure">Not Sure Yet</option>
+                  </select>
+                </div>
 
-            <div>
-              <label htmlFor="message" className="block text-sm font-medium text-stone-700 mb-1">Message (Optional)</label>
-              <textarea id="message" rows={3} className="w-full px-4 py-2 border border-stone-300 rounded-sm focus:ring-1 focus:ring-brand-sage focus:border-brand-sage outline-none"></textarea>
-            </div>
+                <div>
+                  <label htmlFor="message" className="block text-sm font-medium text-stone-700 mb-1">Message (Optional)</label>
+                  <textarea name="message" id="message" rows={3} className="w-full px-4 py-2 border border-stone-300 rounded-sm focus:ring-1 focus:ring-brand-sage focus:border-brand-sage outline-none"></textarea>
+                </div>
 
-            <div className="flex items-start gap-3">
-              <input type="checkbox" id="consent" required className="mt-1 w-4 h-4 text-brand-sage border-stone-300 rounded focus:ring-brand-sage" />
-              <label htmlFor="consent" className="text-xs text-stone-500 leading-normal">
-                By providing my phone number, I agree to receive text messages from Homeowners Maintenance Services (HMS) about my inquiry, appointment scheduling, service updates, and promotional offers. Message and data rates may apply. Message frequency varies. Reply STOP to opt out or HELP for help. See our <a href="/#/privacy-policy" className="underline text-brand-navy">Privacy Policy and Terms of Service</a>.
-              </label>
-            </div>
+                <div className="flex items-start gap-3">
+                  <input type="checkbox" name="consent" id="consent" required className="mt-1 w-4 h-4 text-brand-sage border-stone-300 rounded focus:ring-brand-sage" />
+                  <label htmlFor="consent" className="text-xs text-stone-500 leading-normal">
+                    By providing my phone number, I agree to receive text messages from Homeowners Maintenance Services (HMS) about my inquiry, appointment scheduling, service updates, and promotional offers. Message and data rates may apply. Message frequency varies. Reply STOP to opt out or HELP for help. See our <a href="/#/privacy-policy" className="underline text-brand-navy">Privacy Policy and Terms of Service</a>.
+                  </label>
+                </div>
 
-            <button type="submit" className="w-full bg-brand-sage text-white font-medium py-3 rounded-sm hover:bg-emerald-800 transition-colors shadow-md">
-              Get on the Waitlist
-            </button>
+                <button 
+                  type="submit" 
+                  disabled={status === 'submitting'}
+                  className="w-full bg-brand-sage text-white font-medium py-3 rounded-sm hover:bg-emerald-800 transition-colors shadow-md disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                >
+                  {status === 'submitting' ? (
+                    <>
+                      <Loader2 className="w-5 h-5 animate-spin" />
+                      Submitting...
+                    </>
+                  ) : (
+                    'Get on the Waitlist'
+                  )}
+                </button>
 
-            <p className="text-[10px] text-stone-400 text-center leading-normal">
-              By submitting this form, you consent to receive marketing text messages and phone calls from Homeowners Maintenance Services at the phone number provided, including messages sent by autodialer. Consent is not a condition of purchase. Message and data rates may apply. Message frequency varies. Reply STOP to cancel or HELP for help.
-            </p>
-          </form>
+                {status === 'error' && (
+                  <p className="text-red-600 text-sm text-center">
+                    Something went wrong. Please try again or call us directly.
+                  </p>
+                )}
+
+                <p className="text-[10px] text-stone-400 text-center leading-normal">
+                  By submitting this form, you consent to receive marketing text messages and phone calls from Homeowners Maintenance Services at the phone number provided, including messages sent by autodialer. Consent is not a condition of purchase. Message and data rates may apply. Message frequency varies. Reply STOP to cancel or HELP for help.
+                </p>
+              </form>
+            </>
+          )}
         </div>
       </div>
     </Section>
