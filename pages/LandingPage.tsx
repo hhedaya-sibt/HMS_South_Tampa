@@ -1,16 +1,24 @@
-
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import Section from '../components/ui/Section';
 import { Check, Shield, Clock, Search, FileText, Wrench, Star, ArrowRight, MapPin, ChevronDown, ChevronUp, Phone, Loader2 } from 'lucide-react';
 
 // --- Subcomponents ---
 
-const Hero = () => {
-  const scrollToContact = () => {
-    const el = document.getElementById('contact');
-    el?.scrollIntoView({ behavior: 'smooth' });
-  };
+const scrollToSection = (id: string) => {
+  const element = document.getElementById(id);
+  if (element) {
+    const headerOffset = 100;
+    const elementPosition = element.getBoundingClientRect().top;
+    const offsetPosition = elementPosition + window.scrollY - headerOffset;
+    window.scrollTo({
+      top: offsetPosition,
+      behavior: 'smooth'
+    });
+  }
+};
 
+const Hero = () => {
   return (
     <div className="relative min-h-[90vh] flex items-center bg-stone-900 overflow-hidden">
       {/* Background Image with Overlay */}
@@ -37,17 +45,17 @@ const Hero = () => {
           
           <div className="flex flex-col sm:flex-row gap-4 mb-12">
             <button 
-              onClick={scrollToContact}
+              onClick={() => scrollToSection('contact')}
               className="bg-brand-sage text-white px-8 py-4 rounded-sm font-medium text-lg hover:bg-emerald-800 transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5"
             >
               Join the Founding Member Program
             </button>
-            <a 
-              href="#process"
+            <button 
+              onClick={() => scrollToSection('process')}
               className="px-8 py-4 rounded-sm font-medium text-lg text-white border border-white/30 hover:bg-white/10 transition-all text-center"
             >
               How It Works
-            </a>
+            </button>
           </div>
 
           <div className="flex items-center gap-3 text-stone-400 text-sm">
@@ -510,7 +518,7 @@ const ContactForm = () => {
                 <div className="flex items-start gap-3">
                   <input type="checkbox" name="consent" id="consent" required className="mt-1 w-4 h-4 text-brand-sage border-stone-300 rounded focus:ring-brand-sage" />
                   <label htmlFor="consent" className="text-xs text-stone-500 leading-normal">
-                    By providing my phone number, I agree to receive text messages from Homeowners Maintenance Services (HMS) about my inquiry, appointment scheduling, service updates, and promotional offers. Message and data rates may apply. Message frequency varies. Reply STOP to opt out or HELP for help. See our <a href="/#/privacy-policy" className="underline text-brand-navy">Privacy Policy and Terms of Service</a>.
+                    By providing my phone number, I agree to receive text messages from Homeowners Maintenance Services (HMS) about my inquiry, appointment scheduling, service updates, and promotional offers. Message and data rates may apply. Message frequency varies. Reply STOP to opt out or HELP for help. See our <Link to="/privacy-policy" className="underline text-brand-navy">Privacy Policy and Terms of Service</Link>.
                   </label>
                 </div>
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { Phone, Menu, X } from 'lucide-react';
 
 interface LayoutProps {
@@ -9,13 +9,43 @@ interface LayoutProps {
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
 
   const navLinks = [
-    { name: 'Services', href: '/#services' },
-    { name: 'Process', href: '/#process' },
-    { name: 'Pricing', href: '/#pricing' },
-    { name: 'Testimonials', href: '/#testimonials' },
+    { name: 'Services', id: 'services' },
+    { name: 'Process', id: 'process' },
+    { name: 'Pricing', id: 'pricing' },
+    { name: 'Testimonials', id: 'testimonials' },
   ];
+
+  const handleScroll = (id: string) => {
+    setIsMenuOpen(false);
+    
+    // Function to perform the scroll with offset
+    const performScroll = () => {
+      const element = document.getElementById(id);
+      if (element) {
+        const headerOffset = 100; // Height of header + padding
+        const elementPosition = element.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.scrollY - headerOffset;
+
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth'
+        });
+      }
+    };
+
+    // If we are already on the home page, just scroll
+    if (location.pathname === '/') {
+      performScroll();
+    } else {
+      // If we are on another page, navigate home first, then scroll
+      navigate('/');
+      // Small delay to allow the home page to mount
+      setTimeout(performScroll, 100);
+    }
+  };
 
   return (
     <div className="min-h-screen flex flex-col font-sans">
@@ -24,7 +54,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         <div className="container mx-auto px-4 md:px-6">
           <div className="flex justify-between items-center h-24">
             {/* Logo */}
-            <Link to="/" className="flex items-center">
+            <Link to="/" className="flex items-center" onClick={() => window.scrollTo(0,0)}>
               <img 
                 src="https://storage.googleapis.com/msgsndr/Z9VkbpvTwFPgODZUYAw7/media/6929d5f832bffb323ba2309f.png" 
                 alt="HMS South Tampa" 
@@ -35,13 +65,13 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             {/* Desktop Nav */}
             <nav className="hidden md:flex items-center gap-8">
               {navLinks.map((link) => (
-                <a 
+                <button 
                   key={link.name} 
-                  href={link.href} 
-                  className="text-sm font-medium text-stone-600 hover:text-brand-navy transition-colors"
+                  onClick={() => handleScroll(link.id)}
+                  className="text-sm font-medium text-stone-600 hover:text-brand-navy transition-colors cursor-pointer"
                 >
                   {link.name}
-                </a>
+                </button>
               ))}
               <a 
                 href="https://api.poweradminai.com/widget/bookings/hms-south-tampa-booking-calend"
@@ -67,14 +97,13 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         {isMenuOpen && (
           <div className="md:hidden bg-brand-cream border-t border-stone-200 absolute w-full h-screen top-24 left-0 px-6 py-8 flex flex-col gap-6">
             {navLinks.map((link) => (
-              <a 
+              <button 
                 key={link.name} 
-                href={link.href} 
-                className="text-lg font-serif text-brand-navy border-b border-stone-100 pb-2"
-                onClick={() => setIsMenuOpen(false)}
+                onClick={() => handleScroll(link.id)}
+                className="text-lg font-serif text-brand-navy border-b border-stone-100 pb-2 text-left"
               >
                 {link.name}
-              </a>
+              </button>
             ))}
              <a 
                 href="https://api.poweradminai.com/widget/bookings/hms-south-tampa-booking-calend"
@@ -99,7 +128,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         <div className="container mx-auto px-4 md:px-6">
           <div className="grid md:grid-cols-4 gap-12 mb-12">
             <div className="col-span-1 md:col-span-2">
-               <Link to="/" className="inline-block mb-6">
+               <Link to="/" className="inline-block mb-6" onClick={() => window.scrollTo(0,0)}>
                 <img 
                   src="https://storage.googleapis.com/msgsndr/Z9VkbpvTwFPgODZUYAw7/media/6929d5f84a6880daa779dc90.png" 
                   alt="HMS South Tampa" 
@@ -129,9 +158,9 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             <div>
               <h4 className="text-white font-serif text-lg mb-6">Company</h4>
               <ul className="space-y-3 font-light text-sm">
-                <li><a href="/#process" className="hover:text-white transition-colors">How It Works</a></li>
-                <li><a href="/#pricing" className="hover:text-white transition-colors">Pricing</a></li>
-                <li><a href="/#contact" className="hover:text-white transition-colors">Contact</a></li>
+                <li><button onClick={() => handleScroll('process')} className="hover:text-white transition-colors text-left">How It Works</button></li>
+                <li><button onClick={() => handleScroll('pricing')} className="hover:text-white transition-colors text-left">Pricing</button></li>
+                <li><button onClick={() => handleScroll('contact')} className="hover:text-white transition-colors text-left">Contact</button></li>
                 <li><Link to="/privacy-policy" className="hover:text-white transition-colors">Privacy Policy & Terms</Link></li>
               </ul>
             </div>
