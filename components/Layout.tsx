@@ -10,18 +10,6 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const navigate = useNavigate();
 
-  const handleContactClick = () => {
-    setIsMenuOpen(false);
-    navigate('/');
-    // Small timeout to allow navigation to complete if on a different page
-    setTimeout(() => {
-      const contactSection = document.getElementById('contact');
-      if (contactSection) {
-        contactSection.scrollIntoView({ behavior: 'smooth' });
-      }
-    }, 100);
-  };
-
   const navLinks = [
     { name: 'Services', href: '/#services' },
     { name: 'Process', href: '/#process' },
@@ -55,12 +43,14 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                   {link.name}
                 </a>
               ))}
-              <button 
-                onClick={handleContactClick}
+              <a 
+                href="https://api.poweradminai.com/widget/bookings/hms-south-tampa-booking-calend"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="bg-brand-navy text-white px-6 py-2.5 rounded-sm text-sm font-medium hover:bg-stone-800 transition-colors duration-300 shadow-sm"
               >
                 Schedule Service
-              </button>
+              </a>
             </nav>
 
             {/* Mobile Menu Button */}
@@ -86,12 +76,15 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                 {link.name}
               </a>
             ))}
-             <button 
-                onClick={handleContactClick}
-                className="bg-brand-navy text-white px-6 py-4 rounded-sm text-center font-medium shadow-sm mt-4"
+             <a 
+                href="https://api.poweradminai.com/widget/bookings/hms-south-tampa-booking-calend"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-brand-navy text-white px-6 py-4 rounded-sm text-center font-medium shadow-sm mt-4 block"
+                onClick={() => setIsMenuOpen(false)}
               >
                 Schedule Service
-              </button>
+              </a>
           </div>
         )}
       </header>

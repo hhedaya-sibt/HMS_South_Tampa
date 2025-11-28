@@ -457,7 +457,17 @@ const ContactForm = () => {
           ) : (
             <>
               <h2 className="text-2xl font-serif font-bold text-brand-navy mb-2">Schedule Your Service</h2>
-              <p className="text-stone-500 mb-8">Ready to protect your South Tampa home? Get on the waitlist or schedule a consultation.</p>
+              <p className="text-stone-500 mb-8">
+                Ready to protect your South Tampa home? Get on the waitlist or{' '}
+                <a 
+                  href="https://api.poweradminai.com/widget/bookings/hms-south-tampa-booking-calend" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="text-brand-sage underline hover:text-brand-navy"
+                >
+                  schedule a consultation
+                </a>.
+              </p>
               
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid md:grid-cols-2 gap-6">
