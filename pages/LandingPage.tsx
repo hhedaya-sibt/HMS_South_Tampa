@@ -132,7 +132,13 @@ const HiddenCost = () => {
   );
 };
 
-const ProcessStep = ({ number, title, children }: { number: string; title: string; children: React.ReactNode }) => (
+interface ProcessStepProps {
+  number: string;
+  title: string;
+  children: React.ReactNode;
+}
+
+const ProcessStep: React.FC<ProcessStepProps> = ({ number, title, children }) => (
   <div className="flex gap-6">
     <div className="flex-shrink-0">
       <div className="w-12 h-12 rounded-full bg-brand-navy text-white font-serif font-bold text-xl flex items-center justify-center">
@@ -198,14 +204,17 @@ const Pricing = () => {
           </p>
           <ul className="space-y-4">
             {[
-              "HVAC filter inspection & replacement",
+              "HVAC filter inspection & maintenance",
+              "Light bulb inspection & replacement",
               "Smoke & CO detector testing",
               "Plumbing fixture leak inspection",
-              "Exterior door & window seal check",
-              "Gutter & downspout inspection",
-              "Garage door safety test",
-              "Irrigation system inspection",
-              "Monthly report with photos"
+              "Exterior door seals",
+              "Fridge filter inspection & change",
+              "Kitchen appliance Inspection",
+              "Washer/dryer vent inspection",
+              "Garage door & lube inspection",
+              "Monthly report with photos",
+              "24/7 emergency hotline"
             ].map((item, i) => (
               <li key={i} className="flex gap-3 text-sm text-stone-700">
                 <Check className="w-5 h-5 text-brand-sage flex-shrink-0" />
@@ -230,14 +239,16 @@ const Pricing = () => {
           <ul className="space-y-4">
             <li className="font-semibold text-brand-sage-light">Everything in Essentials, plus:</li>
             {[
-              "HVAC coil cleaning & drain line",
+              "Water leak & trend monitoring",
+              "Interior door hinge lube",
+              "Electric audit & monitoring",
+              "Drain inspection & monitoring",
               "Annual water heater flush",
               "Roof & attic inspection",
-              "Exterior caulking inspection",
+              "Lower exterior caulk inspection",
               "Pest entry point inspection",
-              "Appliance inspection",
-              "Bi-annual deep gutter cleaning",
-              "Priority contractor scheduling"
+              "Annual gutter inspection",
+              "Priority repair scheduling"
             ].map((item, i) => (
               <li key={i} className="flex gap-3 text-sm text-stone-200">
                 <Check className="w-5 h-5 text-brand-sage-light flex-shrink-0" />
@@ -252,23 +263,26 @@ const Pricing = () => {
           <h3 className="text-2xl font-serif font-bold text-brand-navy mb-2">The Estate</h3>
           <div className="flex items-baseline gap-1 mb-6">
             <span className="text-sm text-stone-500">Starting at</span>
-            <span className="text-3xl font-bold text-brand-navy">$399</span>
+            <span className="text-3xl font-bold text-brand-navy">Custom</span>
             <span className="text-stone-500">/mo</span>
           </div>
           <p className="text-sm text-stone-600 mb-8 pb-8 border-b border-stone-100">
-            Full-service home stewardship for larger Tampa properties and discerning homeowners.
+            Full-service home custom stewardship for larger Tampa properties or discerning homeowners.
           </p>
           <ul className="space-y-4">
             <li className="font-semibold text-brand-navy">Everything in Steward, plus:</li>
             {[
-              "Pool & spa equipment inspection",
+              "Custom requests",
+              "Vendor appointment supervision",
+              "Mail & package processing",
+              "WIFI Dead zone monitoring",
               "Landscape irrigation inspection",
+              "Pool equipment inspection",
               "Outdoor lighting inspection",
               "Deck, fence, & pergola inspection",
               "Whole-home systems monitoring",
               "Quarterly walk-through with owner",
-              "Dedicated concierge support line",
-              "Vendor coordination services"
+              "Dedicated voice/SMS concierge"
             ].map((item, i) => (
               <li key={i} className="flex gap-3 text-sm text-stone-700">
                 <Check className="w-5 h-5 text-brand-sage flex-shrink-0" />
@@ -335,7 +349,12 @@ const Testimonials = () => {
   );
 };
 
-const FaqItem = ({ q, a }: { q: string, a: string }) => {
+interface FaqItemProps {
+  q: string;
+  a: string;
+}
+
+const FaqItem: React.FC<FaqItemProps> = ({ q, a }) => {
   const [isOpen, setIsOpen] = React.useState(false);
   return (
     <div className="border-b border-stone-200">
