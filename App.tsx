@@ -1,5 +1,6 @@
 import React from 'react';
 import { HashRouter, Routes, Route, useLocation } from 'react-router-dom';
+import { Analytics } from '@vercel/analytics/react';
 import Layout from './components/Layout';
 import LandingPage from './pages/LandingPage';
 import PrivacyPolicy from './pages/PrivacyPolicy';
@@ -23,6 +24,7 @@ const App: React.FC = () => {
         <Route path="/" element={<Layout><LandingPage /></Layout>} />
         <Route path="/privacy-policy" element={<Layout><PrivacyPolicy /></Layout>} />
       </Routes>
+      <Analytics />
     </HashRouter>
   );
 };
