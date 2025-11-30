@@ -524,7 +524,7 @@ const ContactForm = () => {
                     <option value="">Select a plan...</option>
                     <option value="essentials">Essentials Plan ($149/mo)</option>
                     <option value="steward">Steward Plan ($249/mo)</option>
-                    <option value="estate">Estate Plan ($399/mo)</option>
+                    <option value="estate">Custom Estate Plan</option>
                     <option value="unsure">Not Sure Yet</option>
                   </select>
                 </div>

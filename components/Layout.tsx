@@ -63,7 +63,15 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             </Link>
 
             {/* Desktop Nav */}
-            <nav className="hidden md:flex items-center gap-8">
+            <nav className="hidden md:flex items-center gap-6 xl:gap-8">
+               {/* Phone Number Display for Desktop */}
+              <div className="hidden lg:flex flex-col items-end mr-2 text-right">
+                 <a href="tel:8137055705" className="font-bold text-brand-navy hover:text-brand-sage transition-colors text-sm lg:text-base">
+                   Call (813) 705-5705
+                 </a>
+                 <span className="text-[10px] font-bold text-brand-sage uppercase tracking-widest">Open 24/7</span>
+              </div>
+
               {navLinks.map((link) => (
                 <button 
                   key={link.name} 
@@ -77,7 +85,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                 href="https://api.poweradminai.com/widget/bookings/hms-south-tampa-booking-calend"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-brand-navy text-white px-6 py-2.5 rounded-sm text-sm font-medium hover:bg-stone-800 transition-colors duration-300 shadow-sm"
+                className="bg-brand-navy text-white px-6 py-2.5 rounded-sm text-sm font-medium hover:bg-stone-800 transition-colors duration-300 shadow-sm whitespace-nowrap"
               >
                 Schedule Service
               </a>
@@ -95,7 +103,13 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
 
         {/* Mobile Nav Dropdown */}
         {isMenuOpen && (
-          <div className="md:hidden bg-brand-cream border-t border-stone-200 absolute w-full h-screen top-24 left-0 px-6 py-8 flex flex-col gap-6">
+          <div className="md:hidden bg-brand-cream border-t border-stone-200 absolute w-full h-screen top-24 left-0 px-6 py-8 flex flex-col gap-6 overflow-y-auto pb-32">
+            {/* Mobile Phone */}
+             <div className="flex flex-col gap-1 border-b border-stone-200 pb-6">
+                <a href="tel:8137055705" className="text-xl font-serif text-brand-navy font-bold">Call (813) 705-5705</a>
+                <span className="text-xs font-bold text-brand-sage uppercase tracking-widest">Open 24/7</span>
+             </div>
+
             {navLinks.map((link) => (
               <button 
                 key={link.name} 
@@ -141,6 +155,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
               <div className="flex items-center gap-2 text-white">
                 <Phone size={18} className="text-brand-sage-light" />
                 <span className="font-medium tracking-wide">(813) 705-5705</span>
+                <span className="text-brand-sage-light text-sm font-medium ml-2">• Open 24/7</span>
               </div>
             </div>
 
