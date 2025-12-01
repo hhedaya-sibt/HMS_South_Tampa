@@ -82,7 +82,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                 </button>
               ))}
               <a 
-                href="https://api.poweradminai.com/widget/bookings/hms-south-tampa-booking-calend"
+                href="https://booking.hmssouthtampa.com"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="bg-brand-navy text-white px-6 py-2.5 rounded-sm text-sm font-medium hover:bg-stone-800 transition-colors duration-300 shadow-sm whitespace-nowrap"
@@ -120,7 +120,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
               </button>
             ))}
              <a 
-                href="https://api.poweradminai.com/widget/bookings/hms-south-tampa-booking-calend"
+                href="https://booking.hmssouthtampa.com"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="bg-brand-navy text-white px-6 py-4 rounded-sm text-center font-medium shadow-sm mt-4 block"

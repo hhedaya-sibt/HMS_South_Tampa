@@ -487,7 +487,7 @@ const ContactForm = () => {
               <p className="text-stone-500 mb-8">
                 Ready to protect your South Tampa home? Get on the waitlist or{' '}
                 <a 
-                  href="https://api.poweradminai.com/widget/bookings/hms-south-tampa-booking-calend" 
+                  href="https://booking.hmssouthtampa.com" 
                   target="_blank" 
                   rel="noopener noreferrer" 
                   className="text-brand-sage underline hover:text-brand-navy"
