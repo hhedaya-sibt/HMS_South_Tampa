@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Section from '../components/ui/Section';
-import { Check, Shield, Clock, Search, FileText, Wrench, Star, ArrowRight, MapPin, ChevronDown, ChevronUp, Phone, Loader2 } from 'lucide-react';
+import { Check, Shield, Clock, Search, FileText, Wrench, Star, ArrowRight, MapPin, ChevronDown, ChevronUp, Phone, Loader2, Home, Droplets, Hammer } from 'lucide-react';
 
 // --- Subcomponents ---
 
@@ -25,7 +25,7 @@ const Hero = () => {
       <div className="absolute inset-0 z-0">
         <img 
           src="https://images.unsplash.com/photo-1613977257363-707ba9348227?q=80&w=2670&auto=format&fit=crop" 
-          alt="Luxury Home Exterior" 
+          alt="Handyman services for South Tampa homeowners" 
           className="w-full h-full object-cover opacity-60"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-stone-900/90 via-stone-900/40 to-transparent"></div>
@@ -37,10 +37,10 @@ const Hero = () => {
             South Tampa's Premier Home Care
           </span>
           <h1 className="text-4xl md:text-6xl font-serif font-bold text-white leading-[1.1] mb-6 shadow-sm">
-            Monthly Home Maintenance Service for South Tampa Homeowners
+            Handyman & Home Maintenance Services in South Tampa
           </h1>
           <p className="text-lg md:text-xl text-stone-200 font-light leading-relaxed mb-10 max-w-xl">
-            HMS provides preventative home maintenance and concierge care for busy professionals and families in Tampa, FL. From HVAC filter changes to roof inspections, we handle the monthly tasks that protect your home.
+            Need a reliable handyman in South Tampa? HMS provides professional home repair and ongoing maintenance services for busy homeowners throughout Hyde Park, Beach Park, Davis Islands, and Palma Ceia. Whether you need a one-time fix or want your home professionally maintained every month, we're here to help.
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 mb-12">
@@ -60,11 +60,34 @@ const Hero = () => {
 
           <div className="flex items-center gap-3 text-stone-400 text-sm">
             <Shield className="w-5 h-5 text-brand-sage-light" />
-            <p>Trusted preventative home care serving Hyde Park, Davis Islands, Palma Ceia, and Beach Park</p>
+            <p>Trusted handyman services serving Hyde Park, Davis Islands, Palma Ceia, and Beach Park</p>
           </div>
         </div>
       </div>
     </div>
+  );
+};
+
+const TrustedHandymanSection = () => {
+  return (
+    <Section bg="white">
+      <div className="max-w-3xl mx-auto text-center md:text-left md:max-w-4xl">
+        <h2 className="text-3xl md:text-4xl font-serif font-bold text-brand-navy mb-6 text-center">
+          South Tampa's Trusted Handyman & Home Repair Professionals
+        </h2>
+        <div className="text-lg text-stone-600 leading-relaxed space-y-6">
+          <p>
+            Finding a reliable handyman in South Tampa shouldn't be this hard. Between the no-shows, the guys who never call back, and the ones who do shoddy work, most homeowners have given up on finding someone they can trust.
+          </p>
+          <p>
+            HMS is different. We're not a random guy with a truck. We're a professional home maintenance company that shows up when we say we will, completes the work to a high standard, and keeps your home running smoothly month after month.
+          </p>
+          <p className="font-medium text-brand-navy">
+            Whether you need a one-time repair or want ongoing maintenance handled for you, we serve homeowners throughout South Tampa, Hyde Park, Beach Park, Davis Islands, and Palma Ceia.
+          </p>
+        </div>
+      </div>
+    </Section>
   );
 };
 
@@ -106,7 +129,7 @@ const HiddenCost = () => {
         <div className="relative h-[500px] hidden md:block rounded-sm overflow-hidden shadow-lg">
              <img 
               src="https://storage.googleapis.com/msgsndr/Z9VkbpvTwFPgODZUYAw7/media/6929d95d32bffb1a4ca2a8bc.png" 
-              alt="South Tampa Mediterranean Estate" 
+              alt="South Tampa homeowner review of HMS handyman services" 
               className="w-full h-full object-cover"
             />
             <div className="absolute inset-0 bg-brand-navy/5"></div>
@@ -174,6 +197,41 @@ const HowItWorks = () => {
           <ProcessStep number="4" title="Detailed Reporting and Contractor Coordination">
             After each visit, you receive a report with photos and notes about your home's condition. If we identify issues requiring licensed professionals (plumbers, electricians, roofers), we coordinate repairs for you.
           </ProcessStep>
+        </div>
+      </div>
+    </Section>
+  );
+};
+
+const HandymanServicesSection = () => {
+  const services = [
+    { title: "HVAC Maintenance", desc: "Filter replacement, coil cleaning, drain line flushing, and system inspections. Florida's heat means your AC works overtime. We keep it running efficiently." },
+    { title: "Plumbing Inspections", desc: "Leak detection, fixture checks, water heater maintenance, and drain inspections. We catch small leaks before they become water damage disasters." },
+    { title: "Gutter Cleaning", desc: "Debris removal, downspout clearing, and drainage inspection. Clogged gutters cause roof damage, foundation issues, and mosquito problems." },
+    { title: "Roof Inspections", desc: "Storm damage checks, seal inspection, ventilation review, and shingle assessment. We spot problems before the next big storm makes them worse." },
+    { title: "Appliance Maintenance", desc: "Dishwasher cleaning, dryer vent clearing, garbage disposal service, and refrigerator coil cleaning. Proper maintenance extends appliance life and prevents fires." },
+    { title: "Exterior Maintenance", desc: "Caulking, weather stripping, door and window seal checks, and pest entry point inspection. We keep the elements and critters outside where they belong." },
+    { title: "Safety Checks", desc: "Smoke detector testing, CO detector inspection, garage door safety tests, and GFCI outlet checks. Your family's safety is non-negotiable." },
+    { title: "Irrigation Systems", desc: "Sprinkler inspection, valve checks, timer programming, and leak detection. We keep your lawn green without wasting water or money." }
+  ];
+
+  return (
+    <Section bg="white">
+      <div className="container mx-auto">
+        <h2 className="text-3xl md:text-4xl font-serif font-bold text-brand-navy mb-4 text-center">
+          Handyman Services We Provide
+        </h2>
+        <p className="text-center text-stone-600 mb-12 max-w-3xl mx-auto">
+          Our trained technicians handle all the home maintenance and repair tasks that keep your South Tampa home running smoothly:
+        </p>
+
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {services.map((service, index) => (
+            <div key={index} className="bg-brand-cream/50 p-6 rounded-sm border border-stone-100 hover:border-brand-sage/20 transition-colors">
+              <h3 className="text-xl font-bold text-brand-navy mb-3">{service.title}</h3>
+              <p className="text-sm text-stone-600 leading-relaxed">{service.desc}</p>
+            </div>
+          ))}
         </div>
       </div>
     </Section>
@@ -302,7 +360,7 @@ const ConciergeSection = () => {
       <div className="absolute inset-0">
          <img 
           src="https://images.unsplash.com/photo-1511895426328-dc8714191300?q=80&w=2670&auto=format&fit=crop" 
-          alt="Family walking in a park near home" 
+          alt="Professional home maintenance technician in Hyde Park Tampa" 
           className="w-full h-full object-cover opacity-40 grayscale mix-blend-multiply"
         />
       </div>
@@ -318,6 +376,58 @@ const ConciergeSection = () => {
         </div>
       </div>
     </section>
+  );
+};
+
+const ServiceAreaExpanded = () => {
+  return (
+    <Section id="area" bg="white">
+      <div className="max-w-4xl mx-auto">
+        <div className="text-center mb-12">
+           <h2 className="text-3xl md:text-4xl font-serif font-bold text-brand-navy mb-6">Serving South Tampa's Premier Neighborhoods</h2>
+           <p className="text-stone-600">HMS provides professional handyman and home maintenance services throughout South Tampa and surrounding areas.</p>
+        </div>
+
+        <div className="space-y-12">
+          <div className="bg-brand-cream/40 p-8 rounded-sm">
+            <h3 className="text-2xl font-serif font-bold text-brand-navy mb-3">Hyde Park Handyman Services</h3>
+            <p className="text-stone-600 leading-relaxed">
+              Historic Hyde Park homes require specialized care. Our technicians understand the unique maintenance needs of older properties, from original plumbing systems to vintage HVAC units. We provide reliable handyman and home maintenance services throughout Hyde Park Village and surrounding streets. Whether you live in a 1920s bungalow or a modern renovation, we keep your home in top condition.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-8">
+            <div>
+              <h3 className="text-xl font-serif font-bold text-brand-navy mb-3">Beach Park Home Repair & Maintenance</h3>
+              <p className="text-stone-600 leading-relaxed text-sm">
+                Beach Park homeowners trust HMS for consistent, professional home care. This tight-knit community deserves a handyman service that shows up on time and does the job right. From routine maintenance to storm preparation, we keep your coastal property protected year-round.
+              </p>
+            </div>
+            <div>
+              <h3 className="text-xl font-serif font-bold text-brand-navy mb-3">Davis Islands Handyman Services</h3>
+              <p className="text-stone-600 leading-relaxed text-sm">
+                Waterfront properties on Davis Islands face unique challenges from salt air and humidity. Corrosion, moisture intrusion, and accelerated wear are constant concerns. Our maintenance plans address these specific issues with regular inspections and preventative care designed for island living.
+              </p>
+            </div>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-8">
+            <div>
+              <h3 className="text-xl font-serif font-bold text-brand-navy mb-3">Palma Ceia Home Maintenance</h3>
+              <p className="text-stone-600 leading-relaxed text-sm">
+                Estate homes in Palma Ceia deserve premium care. Larger properties with pools, irrigation systems, and extensive grounds require comprehensive maintenance. Our Estate Plan provides full-service home stewardship for discerning Palma Ceia homeowners who expect the best.
+              </p>
+            </div>
+             <div>
+              <h3 className="text-xl font-serif font-bold text-brand-navy mb-3">South Tampa Handyman Services</h3>
+              <p className="text-stone-600 leading-relaxed text-sm">
+                From Bayshore Boulevard to Gandy, we serve homeowners throughout South Tampa. No matter which neighborhood you call home, HMS provides the reliable handyman and maintenance services you've been looking for.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Section>
   );
 };
 
@@ -374,13 +484,14 @@ const FaqItem: React.FC<FaqItemProps> = ({ q, a }) => {
 
 const FAQ = () => {
   const faqs = [
-    { q: "What does preventative home maintenance include?", a: "Preventative home maintenance includes monthly inspections and maintenance tasks designed to catch problems early and extend the life of your home's systems. This includes HVAC filter changes, plumbing inspections, gutter cleaning, roof checks, appliance maintenance, and more depending on your plan level." },
-    { q: "How often do you visit my Tampa home?", a: "HMS provides monthly home maintenance visits. We schedule the same day each month so you always know when to expect us." },
-    { q: "Do you service homes outside South Tampa?", a: "Currently, HMS serves South Tampa, Hyde Park, Davis Islands, Palma Ceia, Beach Park, and immediately surrounding neighborhoods. We're expanding throughout Tampa Bay in 2025." },
-    { q: "What if you find a problem that needs a licensed contractor?", a: "We coordinate with licensed plumbers, electricians, roofers, and other specialists on your behalf. You approve any work before it's scheduled, and we ensure it's completed properly." },
-    { q: "How much does home maintenance service cost in Tampa?", a: "Our preventative maintenance plans start at $149/month for essential care, $249/month for comprehensive maintenance, and $399/month for full estate-level service." },
-    { q: "Is HMS a handyman service?", a: "No. HMS is a preventative maintenance program, not a reactive repair service. We focus on consistent monthly care that prevents expensive problems rather than fixing things after they break." },
-    { q: "Can I cancel my home maintenance plan?", a: "Yes. We require 30 days notice for cancellation. Founding Members receive special pricing guarantees during their initial 12-month period." },
+    { q: "How much does a handyman cost in South Tampa?", a: "HMS offers home maintenance plans starting at $149/month for essential services, $249/month for comprehensive maintenance, and custom pricing for estate-level care. Our plans include monthly visits, preventative maintenance, and contractor coordination. For one-time projects, contact us for a custom quote." },
+    { q: "What handyman services do you offer?", a: "We provide HVAC maintenance, plumbing inspections, gutter cleaning, roof inspections, appliance maintenance, smoke detector testing, irrigation system checks, exterior maintenance, and general home repairs. Our technicians handle the full range of tasks needed to keep your home running smoothly." },
+    { q: "Do you offer one-time repairs or only maintenance plans?", a: "While our specialty is ongoing monthly maintenance, we understand some homeowners prefer project-based work. Contact us to discuss your needs. That said, most clients who try our maintenance plans never go back to the old way of waiting for things to break." },
+    { q: "What areas do you serve?", a: "We serve South Tampa and surrounding neighborhoods including Hyde Park, Beach Park, Davis Islands, Palma Ceia, and Bayshore. If you're in the South Tampa area, we can likely help." },
+    { q: "How is HMS different from a regular handyman?", a: "Most handymen only show up when something breaks. HMS provides proactive monthly maintenance designed to prevent problems before they happen. We catch small issues before they become expensive emergencies. Think of us as a property manager for your own home." },
+    { q: "What does your monthly maintenance visit include?", a: "Each month, a trained technician visits your home, completes a customized maintenance checklist, inspects for early warning signs of problems, and coordinates with licensed contractors when specialized work is needed. You receive a detailed report after every visit." },
+    { q: "Are you licensed and insured?", a: "Yes. Our technicians are trained, vetted, and professional. We carry appropriate insurance coverage for your protection." },
+    { q: "How do I get started?", a: "Fill out the contact form below or call (813) 725-5705. We're currently accepting Founding Members with waived initiation fees and locked pricing for 24 months." },
   ];
 
   return (
@@ -459,7 +570,7 @@ const ContactForm = () => {
             <p className="font-serif text-lg mb-2">Contact Us</p>
              <div className="flex items-center gap-2 text-stone-300">
                 <Phone size={18} />
-                <span className="font-medium">(813) 705-5705</span>
+                <span className="font-medium">(813) 725-5705</span>
               </div>
           </div>
         </div>
@@ -578,27 +689,14 @@ const LandingPage = () => {
   return (
     <>
       <Hero />
+      <TrustedHandymanSection />
       <FeatureList />
       <HiddenCost />
       <HowItWorks />
+      <HandymanServicesSection />
       <Pricing />
       <ConciergeSection />
-      <Section id="area" bg="white">
-        <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-3xl font-serif font-bold text-brand-navy mb-6">Serving South Tampa's Premier Neighborhoods</h2>
-            <div className="flex flex-wrap justify-center gap-4 text-stone-600">
-                <span className="flex items-center gap-2"><MapPin size={16} className="text-brand-sage" /> Hyde Park</span>
-                <span className="hidden md:inline text-stone-300">|</span>
-                <span className="flex items-center gap-2"><MapPin size={16} className="text-brand-sage" /> Davis Islands</span>
-                <span className="hidden md:inline text-stone-300">|</span>
-                <span className="flex items-center gap-2"><MapPin size={16} className="text-brand-sage" /> Palma Ceia</span>
-                <span className="hidden md:inline text-stone-300">|</span>
-                <span className="flex items-center gap-2"><MapPin size={16} className="text-brand-sage" /> Beach Park</span>
-                <span className="hidden md:inline text-stone-300">|</span>
-                <span className="flex items-center gap-2"><MapPin size={16} className="text-brand-sage" /> South Tampa</span>
-            </div>
-        </div>
-      </Section>
+      <ServiceAreaExpanded />
       <Testimonials />
       <FAQ />
       <ContactForm />

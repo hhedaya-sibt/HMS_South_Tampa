@@ -99,7 +99,7 @@ const PrivacyPolicy = () => {
           <h2>SMS Marketing and Text Messaging</h2>
           <p><strong>Opt-In:</strong> You opt in to receive text messages by providing your phone number and checking the consent box on our contact form.</p>
           <p><strong>Opt-Out:</strong> You may opt out at any time by replying STOP to any message.</p>
-          <p><strong>Help:</strong> Reply HELP to any message for assistance, or call us at (813) 705-5705 or fill out the contact form on our website.</p>
+          <p><strong>Help:</strong> Reply HELP to any message for assistance, or call us at (813) 725-5705 or fill out the contact form on our website.</p>
           <p><strong>Message Frequency:</strong> Message frequency varies based on your inquiry and service status.</p>
           <p><strong>Message and Data Rates:</strong> Standard message and data rates may apply depending on your carrier.</p>
           <p><strong>Information Collected:</strong> We may collect your phone number, carrier name, and the date, time, and content of messages.</p>
@@ -132,8 +132,8 @@ const PrivacyPolicy = () => {
 
           <h2>Contact Us</h2>
           <p>
-            <strong>Phone:</strong> (813) 705-5705<br />
-            <strong>Text/SMS:</strong> (813) 705-5705<br />
+            <strong>Phone:</strong> (813) 725-5705<br />
+            <strong>Text/SMS:</strong> (813) 725-5705<br />
             <strong>Website:</strong> hmssouthtampa.com
           </p>
           <p>Or fill out the contact form on our homepage.</p>
